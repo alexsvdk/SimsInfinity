@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "682071261423",
+    "firebase_url": "https://sims-infinity.firebaseio.com",
+    "project_id": "sims-infinity",
+    "storage_bucket": "sims-infinity.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682071261423:android:348763d98f079e46bfdb1a",
+        "android_client_info": {
+          "package_name": "ru.temoteam.simsinfinity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "682071261423-84isggkrhlq8bmhea1v0a477rkd9vk04.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAO1AQb0CkK6mNUBMxvcukctxLBrcZrMhA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "682071261423-84isggkrhlq8bmhea1v0a477rkd9vk04.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Sims infinity</string>
+    <string name="register">REGISTER</string>
+    <string name="username">Username</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="i_agree_to_the_terms_of_service">I agree to the Terms of Service</string>
+    <string name="already_a_member_login_here">Already a member? Login Here</string>
+    <string name="password">Password</string>
+    <string name="re_type_password">Re-type Password</string>
+    <string name="email">Email</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="check_your_phone_number">Check your phone number</string>
+</resources>
