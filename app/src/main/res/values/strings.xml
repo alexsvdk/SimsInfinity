@@ -14,4 +14,6 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="check_your_phone_number">Check your phone number</string>
+    <string name="user">User</string>
+    <string name="goals">Goals</string>
 </resources>
