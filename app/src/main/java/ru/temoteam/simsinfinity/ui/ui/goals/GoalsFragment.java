@@ -55,5 +55,6 @@ public class GoalsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        goalsAdapter.update();
     }
 }

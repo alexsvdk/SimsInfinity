@@ -1,6 +1,7 @@
 package ru.temoteam.simsinfinity.ui.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ import java.util.Date;
 
 import ru.temoteam.simsinfinity.R;
 import ru.temoteam.simsinfinity.data.models.Goal;
+import ru.temoteam.simsinfinity.ui.GoalActivity;
 
 public class GoalsAdapter extends  RecyclerView.Adapter<GoalsAdapter.GoalViewHolder> {
 
@@ -34,11 +37,13 @@ public class GoalsAdapter extends  RecyclerView.Adapter<GoalsAdapter.GoalViewHol
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private Date date = new Date();
+    private Context context;
     private SimpleDateFormat format = new SimpleDateFormat("DD.MM.YY");
     //private ItemClickListener mClickListener;
 
     public GoalsAdapter(Context context){
         mInflater = LayoutInflater.from(context);
+        this.context = context;
     }
 
     public void update(){
@@ -50,7 +55,9 @@ public class GoalsAdapter extends  RecyclerView.Adapter<GoalsAdapter.GoalViewHol
                         if (task.isSuccessful()){
                             goals = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                goals.add(Goal.fromMap(document.getData()));
+                                Goal g = Goal.fromMap(document.getData());
+                                g.getAdditionalProperties().put("id",document.getId());
+                                goals.add(g);
                             }
                             notifyDataSetChanged();
                     }}
@@ -68,12 +75,20 @@ public class GoalsAdapter extends  RecyclerView.Adapter<GoalsAdapter.GoalViewHol
 
     @Override
     public void onBindViewHolder(@NonNull GoalViewHolder holder, int position) {
+
         Goal g = goals.get(position);
         holder.title.setText(g.getTitle());
         holder.description.setText(g.getDescription());
         holder.setPercent(g.getCompleted()/g.getTotal());
-        holder.deadline.setText(format.format(date));
-        holder.setPercent((1.0*(date.getTime()-g.getStartDate()))/(g.getDeadline()-g.getStartDate()),holder.f3,holder.f4,false);
+        holder.deadline.setText(format.format(new Date(g.getDeadline())));
+        holder.setPercent((1.0*(date.getTime()-g.getStartDate()))/(1.0*(g.getDeadline()-g.getStartDate())),
+                holder.f3,holder.f4,false);
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, GoalActivity.class);
+            intent.putExtra("goal", g);
+            context.startActivity(intent);
+        });
+
     }
 
     @Override
@@ -93,6 +108,7 @@ public class GoalsAdapter extends  RecyclerView.Adapter<GoalsAdapter.GoalViewHol
         FrameLayout f1, f2,f3,f4;
 
         void setPercent(double perc,FrameLayout f1, FrameLayout f2, boolean b){
+            //TODO fix long percent
             if (b)
             percent.setText(perc*100+"%");
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -119,7 +135,6 @@ public class GoalsAdapter extends  RecyclerView.Adapter<GoalsAdapter.GoalViewHol
             f2 = itemView.findViewById(R.id.incomplete);
             f3 = itemView.findViewById(R.id.f3);
             f4 = itemView.findViewById(R.id.f4);
-
         }
     }
 }

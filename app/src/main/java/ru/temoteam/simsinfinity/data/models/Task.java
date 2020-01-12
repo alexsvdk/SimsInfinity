@@ -9,6 +9,7 @@ public class Task {
     private String description;
     private long deadline;
     private double progress;
+    private boolean completed;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String getTitle() {
@@ -21,6 +22,19 @@ public class Task {
 
     public Task withTitle(String title) {
         this.title = title;
+        return this;
+    }
+
+    public boolean getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
+    public Task withCompleted(boolean completed) {
+        this.completed = completed;
         return this;
     }
 

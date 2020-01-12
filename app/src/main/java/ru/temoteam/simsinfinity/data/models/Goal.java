@@ -1,12 +1,16 @@
 package ru.temoteam.simsinfinity.data.models;
 
+import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.IgnoreExtraProperties;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Goal {
+public class Goal implements Serializable {
 
     public static Goal fromMap(Map<String,Object> map){
         return new Goal()
@@ -31,6 +35,7 @@ public class Goal {
     private String value;
     private String reward;
     private String reason;
+    @Exclude
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String getTitle() {
