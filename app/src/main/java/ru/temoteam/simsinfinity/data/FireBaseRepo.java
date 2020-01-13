@@ -10,7 +10,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import ru.temoteam.simsinfinity.data.Repo;
 import ru.temoteam.simsinfinity.data.models.Goal;
 import ru.temoteam.simsinfinity.data.models.Task;
 import ru.temoteam.simsinfinity.data.models.User;
