@@ -9,11 +9,24 @@
     <string name="re_type_password">Re-type Password</string>
     <string name="email">Email</string>
     <string name="sign_in">SIGN IN</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main" translatable="false">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="check_your_phone_number">Check your phone number</string>
     <string name="user">User</string>
     <string name="goals">Goals</string>
+    <string name="goal_title">Goal title</string>
+    <string name="description">Description</string>
+    <string name="to_reach">To reach</string>
+    <string name="of">of</string>
+    <string name="you_already_reached">You already reached</string>
+    <string name="deadline_date">Deadline date</string>
+    <string name="why_you_whant_it">Why you whant it?</string>
+    <string name="how_you_reward_yourself">How you reward yourself ?</string>
+    <string name="task_title">Task title</string>
+    <string name="delete">Delete</string>
+    <string name="apply">Apply</string>
+    <string name="actual_tasks">Actual tasks</string>
+    <string name="birthday">Birthday</string>
 </resources>

@@ -60,9 +60,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:textColorHint="@color/white"
                     android:layout_marginBottom="20dp"
                     android:fontFamily="sans-serif-medium"
-                    android:text="Username"
+                    android:hint="@string/username"
                     android:id="@+id/username"
                     android:textColor="@color/white"
                     android:textSize="22sp" />
@@ -80,7 +81,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Birthday"
+                    android:text="@string/birthday"
                     android:padding="5dp"
                     android:id="@+id/textview"
                     android:background="@color/colorPrimary"

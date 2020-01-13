@@ -10,4 +10,23 @@
     <string name="username">Юзернейм</string>
     <string name="email">Почта</string>
     <string name="already_a_member_login_here">Уже есть аккаунт? Войдите</string>
+    <string name="actual_tasks">Актуальные задачи</string>
+    <string name="apply">Применить</string>
+    <string name="birthday">День рождения</string>
+    <string name="check_your_phone_number">Проверьте ваш номер телефона</string>
+    <string name="deadline_date">Дата завершения</string>
+    <string name="delete">Удалить</string>
+    <string name="description">Описание</string>
+    <string name="goal_title">Название цел</string>
+    <string name="goals">Цели</string>
+    <string name="how_you_reward_yourself">Как вы наградите себя ?</string>
+    <string name="of">" "</string>
+    <string name="task_title">Название задачи</string>
+    <string name="title_home">Задачи</string>
+    <string name="why_you_whant_it">Почему для вас это важно ?</string>
+    <string name="you_already_reached">Вы уже достигли</string>
+    <string name="to_reach">Вы собираетесь достичь</string>
+    <string name="title_dashboard">Цели</string>
+    <string name="title_notifications">Вы</string>
+    <string name="user">Пользователь</string>
 </resources>
