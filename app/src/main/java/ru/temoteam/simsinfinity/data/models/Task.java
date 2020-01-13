@@ -1,16 +1,35 @@
 package ru.temoteam.simsinfinity.data.models;
 
+import com.google.firebase.firestore.Exclude;
+
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Task {
+public class Task implements Serializable {
 
     private String title;
     private String description;
     private long deadline;
     private double progress;
     private boolean completed;
+    @Exclude
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    public static Task fromMap(Map<String, Object> map) {
+        Task task = new Task();
+        if (map.containsKey("title"))
+        task.title = (String) map.get("title");
+        if (map.containsKey("deadline"))
+        task.deadline = (long) map.get("deadline");
+        if (map.containsKey("description"))
+        task.description = (String) map.get("description");
+        if (map.containsKey("progress"))
+        task.progress = (double) map.get("progress");
+        if (map.containsKey("completed"))
+        task.completed = (boolean) map.get("completed");
+        return task;
+    }
 
     public String getTitle() {
         return title;

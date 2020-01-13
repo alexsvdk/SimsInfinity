@@ -30,7 +30,7 @@ public class Goal implements Serializable {
     private long startDate = new Date().getTime();
     private double total;
     private double completed;
-    private List<Task> tasks = new ArrayList<Task>();
+    private List<String> tasks = new ArrayList<String>();
     private long deadline;
     private String value;
     private String reward;
@@ -90,15 +90,15 @@ public class Goal implements Serializable {
         return this;
     }
 
-    public List<Task> getTasks() {
+    public List<String> getTasks() {
         return tasks;
     }
 
-    public void setTasks(List<Task> tasks) {
+    public void setTasks(List<String> tasks) {
         this.tasks = tasks;
     }
 
-    public Goal withTasks(List<Task> tasks) {
+    public Goal withTasks(List<String> tasks) {
         this.tasks = tasks;
         return this;
     }

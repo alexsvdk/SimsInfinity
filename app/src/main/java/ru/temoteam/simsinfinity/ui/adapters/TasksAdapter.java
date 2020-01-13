@@ -13,51 +13,48 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 import ru.temoteam.simsinfinity.R;
+import ru.temoteam.simsinfinity.data.FireBaseRepo;
 import ru.temoteam.simsinfinity.data.models.Goal;
+import ru.temoteam.simsinfinity.data.models.Task;
 import ru.temoteam.simsinfinity.ui.GoalActivity;
+import ru.temoteam.simsinfinity.ui.TaskActivity;
 
-public class GoalsAdapter extends  RecyclerView.Adapter<GoalsAdapter.GoalViewHolder> {
+public class TasksAdapter extends  RecyclerView.Adapter<TasksAdapter.GoalViewHolder> {
 
     private LayoutInflater mInflater;
-    private ArrayList<Goal> goals = new ArrayList<>();
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private ArrayList<Task> tasks = new ArrayList<>();
+    private FireBaseRepo fbr = new FireBaseRepo();
     private Date date = new Date();
     private Context context;
-    private SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy");
+    private SimpleDateFormat format = new SimpleDateFormat("DD.MM.YY");
     //private ItemClickListener mClickListener;
 
-    public GoalsAdapter(Context context){
+    public TasksAdapter(Context context){
         mInflater = LayoutInflater.from(context);
         this.context = context;
     }
 
     public void update(){
-        db.collection("users")
-                .document(auth.getUid()).collection("goals").get().addOnCompleteListener(
+        fbr.getDB().collection("tasks").get().addOnCompleteListener(
                 new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    public void onComplete(@NonNull com.google.android.gms.tasks.Task<QuerySnapshot> task) {
                         if (task.isSuccessful()){
-                            goals = new ArrayList<>();
+                            tasks = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Goal g = Goal.fromMap(document.getData());
-                                g.getAdditionalProperties().put("id",document.getId());
-                                goals.add(g);
+                                Task t = Task.fromMap(document.getData());
+                                t.getAdditionalProperties().put("id",document.getId());
+                                tasks.add(t);
                             }
                             notifyDataSetChanged();
                     }}
@@ -75,17 +72,14 @@ public class GoalsAdapter extends  RecyclerView.Adapter<GoalsAdapter.GoalViewHol
 
     @Override
     public void onBindViewHolder(@NonNull GoalViewHolder holder, int position) {
-
-        Goal g = goals.get(position);
-        holder.title.setText(g.getTitle());
-        holder.description.setText(g.getDescription());
-        holder.setPercent(g.getCompleted()/g.getTotal());
-        holder.deadline.setText(format.format(new Date(g.getDeadline())));
-        holder.setPercent((1.0*(date.getTime()-g.getStartDate()))/(1.0*(g.getDeadline()-g.getStartDate())),
-                holder.f3,holder.f4,false);
+        Task t = tasks.get(position);
+        holder.title.setText(t.getTitle());
+        holder.description.setText(t.getDescription());
+        holder.setPercent(1);
+        holder.deadline.setText(format.format(new Date(t.getDeadline())));
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, GoalActivity.class);
-            intent.putExtra("goal", g);
+            Intent intent = new Intent(context, TaskActivity.class);
+            intent.putExtra("task", t);
             context.startActivity(intent);
         });
 
@@ -93,7 +87,7 @@ public class GoalsAdapter extends  RecyclerView.Adapter<GoalsAdapter.GoalViewHol
 
     @Override
     public int getItemCount() {
-        return goals.size();
+        return tasks.size();
     }
 
     @Override

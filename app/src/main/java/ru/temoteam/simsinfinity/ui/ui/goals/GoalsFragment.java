@@ -38,12 +38,7 @@ public class GoalsFragment extends Fragment {
         rw = root.findViewById(R.id.recycler);
 
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), GoalActivity.class));
-            }
-        });
+        fab.setOnClickListener(v -> startActivity(new Intent(getActivity(), GoalActivity.class)));
 
         rw.setLayoutManager(new LinearLayoutManager(getActivity()));
         goalsAdapter =  new GoalsAdapter(getActivity());

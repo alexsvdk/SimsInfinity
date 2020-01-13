@@ -7,11 +7,8 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -19,12 +16,11 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import ru.temoteam.simsinfinity.R;
 import ru.temoteam.simsinfinity.data.models.User;
-import ru.temoteam.simsinfinity.ui.GoalActivity;
+import ru.temoteam.simsinfinity.util.DatePickerUtil;
 
 public class UserFragment extends Fragment implements View.OnClickListener {
 
@@ -40,8 +36,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     ImageView ava, edit;
     FloatingActionButton fab;
 
-    SimpleDateFormat d = new SimpleDateFormat("DD"),m = new SimpleDateFormat("MM"),
-            y = new SimpleDateFormat("YYYY");
+
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -85,9 +80,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
             public void onChanged(User user) {
                 if (user==null) return;
                 username.setText(user.getUsername());
-                date.updateDate(Integer.parseInt(y.format(new Date(user.getBirtday()))),
-                        Integer.parseInt(m.format(new Date(user.getBirtday()))),
-                        Integer.parseInt(d.format(new Date(user.getBirtday()))));
+                DatePickerUtil.updateDP(date,new Date(user.getBirtday()));
 
             }
         });
@@ -102,7 +95,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if(userViewModel.editing.getValue()){
             userViewModel.user.postValue(new User().withUsername(username.getText().toString())
-                    .withBirtday(GoalActivity.getTime(date)));
+                    .withBirtday(DatePickerUtil.datePicker2Date(date)));
         }else {
 
         }

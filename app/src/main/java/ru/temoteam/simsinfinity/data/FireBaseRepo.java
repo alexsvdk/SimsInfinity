@@ -12,6 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import ru.temoteam.simsinfinity.data.Repo;
 import ru.temoteam.simsinfinity.data.models.Goal;
+import ru.temoteam.simsinfinity.data.models.Task;
 import ru.temoteam.simsinfinity.data.models.User;
 
 public class FireBaseRepo implements Repo {
@@ -52,15 +53,43 @@ public class FireBaseRepo implements Repo {
     }
 
     @Override
-    public void getGoals() {
-
-    }
-
-    @Override
     public void updateGoal(Goal goal) {
         String id = (String) goal.getAdditionalProperties().get("id");
         db.collection("users")
                 .document(auth.getUid()).collection("goals").document(id).set(goal);
+    }
+
+    @Override
+    public void saveTask(Task task) {
+        db.collection("users")
+                .document(auth.getUid()).collection("tasks")
+                .add(task)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+    }
+
+    @Override
+    public void removeTask(Task task) {
+        String id = (String) task.getAdditionalProperties().get("id");
+        db.collection("users")
+                .document(auth.getUid()).collection("tasks").document(id).delete();
+    }
+
+    @Override
+    public void updateTask(Task task) {
+        String id = (String) task.getAdditionalProperties().get("id");
+        db.collection("users")
+                .document(auth.getUid()).collection("tasks").document(id).set(task);
     }
 
     @Override

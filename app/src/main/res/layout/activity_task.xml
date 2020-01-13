@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.TaskActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/circle"
+                    android:padding="10dp"
+                    android:src="@drawable/img_register"
+                    android:tint="@color/white" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:id="@+id/title"
+                    android:hint="Task title"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"
+                    android:textSize="22sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/linearLayout1"
+                android:layout_marginTop="-10dp"
+                android:rotation="45"
+                android:src="@drawable/square"
+                android:layout_gravity="center_horizontal"/>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView1"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="30dp">
+
+                <ImageView
+                    android:id="@+id/imgView_desc"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@color/colorPrimary"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_description_black_24dp"
+                    android:tint="@color/white" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/imgView_desc"
+                    android:id="@+id/description"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/imgView_desc"
+                    android:background="@color/editTextBG"
+                    android:hint="Description"
+                    android:paddingLeft="20dp"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView1"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Deadline date"
+                    android:padding="5dp"
+                    android:id="@+id/textview"
+                    android:background="@color/colorPrimary"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:layout_centerHorizontal="true"
+                    />
+
+
+                <DatePicker
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/date"
+                    android:foregroundGravity="center"
+                    android:background="@color/editTextBG"
+                    android:layout_below="@id/textview"
+                    android:textSize="15sp" />
+
+
+            </RelativeLayout>
+
+
+            <Button
+                android:id="@+id/btn_apply"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tw_warning"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/colorPrimary"
+                android:fontFamily="sans-serif-medium"
+                android:text="Apply"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btn_delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tw_warning"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/red"
+                android:fontFamily="sans-serif-medium"
+                android:visibility="gone"
+                android:text="Delete"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/white" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/ic_done_black_24dp"
+        android:tint="@color/white"
+        android:layout_margin="16dp"
+        android:id="@+id/fab"/>
+
+
+
+</RelativeLayout>

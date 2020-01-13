@@ -17,15 +17,15 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import ru.temoteam.simsinfinity.data.FireBaseRepo;
 import ru.temoteam.simsinfinity.R;
 import ru.temoteam.simsinfinity.data.models.Goal;
+import ru.temoteam.simsinfinity.util.DatePickerUtil;
+import ru.temoteam.simsinfinity.util.ScrollFabHider;
 
-public class GoalActivity extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener, TextWatcher, View.OnScrollChangeListener {
+public class GoalActivity extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener, TextWatcher {
 
     static String TAG = "GoalActivity";
 
@@ -38,8 +38,6 @@ public class GoalActivity extends AppCompatActivity implements View.OnClickListe
     ScrollView sw;
     SeekBar reached;
     FireBaseRepo fbr = new FireBaseRepo();
-    SimpleDateFormat d = new SimpleDateFormat("DD"),m = new SimpleDateFormat("MM"),
-            y = new SimpleDateFormat("YYYY");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +61,7 @@ public class GoalActivity extends AppCompatActivity implements View.OnClickListe
         reached.setOnSeekBarChangeListener(this);
         apply.setOnClickListener(this);
         total.addTextChangedListener(this);
-        sw.setOnScrollChangeListener(this);
+        sw.setOnScrollChangeListener(new ScrollFabHider(fab));
         fab.setOnClickListener(this);
         delete.setOnClickListener(this);
 
@@ -87,9 +85,7 @@ public class GoalActivity extends AppCompatActivity implements View.OnClickListe
         tw2.setText(goal.getCompleted()/100.0+"/"+total.getText().toString());
         reason.setText(goal.getReason());
         reward.setText(goal.getReward());
-        deadline.updateDate(Integer.parseInt(y.format(new Date(goal.getDeadline()))),
-                Integer.parseInt(m.format(new Date(goal.getDeadline()))),
-                Integer.parseInt(d.format(new Date(goal.getDeadline()))));
+        DatePickerUtil.updateDP(deadline,new Date(goal.getDeadline()));
     }
 
     @Override
@@ -105,7 +101,7 @@ public class GoalActivity extends AppCompatActivity implements View.OnClickListe
             goal.setTotal(Double.parseDouble(total.getText().toString()));
             goal.setReason(reason.getText().toString());
             goal.setReward(reward.getText().toString());
-            goal.setDeadline(getTime());
+            goal.setDeadline(DatePickerUtil.datePicker2Date(deadline));
             goal.setCompleted(reached.getProgress() / 100.0);
             if (goal.getAdditionalProperties().containsKey("id"))
                 fbr.updateGoal(goal);
@@ -150,28 +146,4 @@ public class GoalActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    @Override
-    public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-        if (scrollY>oldScrollY)
-            fab.hide();
-        if (scrollY<oldScrollY)
-            fab.show();
-    }
-
-    public static long getTime(DatePicker dp) {
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, dp.getYear());
-        c.set(Calendar.MONTH, dp.getMonth());
-        c.set(Calendar.DAY_OF_MONTH, dp.getDayOfMonth());
-        c.set(Calendar.HOUR, 0);
-        c.set(Calendar.MINUTE, 0);
-        c.set(Calendar.SECOND, 0);
-        c.set(Calendar.MILLISECOND, 0);
-
-        return c.getTimeInMillis();
-    }
-
-    long getTime(){
-        return getTime(deadline);
-    }
 }
